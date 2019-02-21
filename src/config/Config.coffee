@@ -505,7 +505,7 @@ Config =
       ]
       'Always Show Char Counter': [
         false
-		'Always shows the char counter on the bottom right of the QR text area.'
+        'Always shows the char counter on the bottom right of the QR text area.'
         1
       ]
       'Captcha Fixes': [
