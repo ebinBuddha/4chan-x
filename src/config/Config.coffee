@@ -503,6 +503,11 @@ Config =
         'Submit the post immediately when the captcha is completed.'
         1
       ]
+      'Always Show Char Counter': [
+        false
+		'Always shows the char counter on the bottom right of the QR text area.'
+        1
+      ]
       'Captcha Fixes': [
         true
         'Make captcha easier to use, especially with the keyboard.'
