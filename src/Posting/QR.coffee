@@ -344,7 +344,7 @@ QR =
     counter = QR.nodes.charCount
     count   = QR.nodes.com.value.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '_').length
     counter.textContent = count
-    counter.hidden      = count < QR.max_comment/2
+    counter.hidden      = (count < QR.max_comment/2) and not Conf['Always Show Char Counter']
     (if count > QR.max_comment then $.addClass else $.rmClass) counter, 'warning'
 
   getFile: ->
