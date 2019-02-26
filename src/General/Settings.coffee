@@ -539,7 +539,7 @@ Settings =
       $.id('lastarchivecheck').textContent = 'never'
 
     items = {}
-    for name in ['archiveLists', 'archiveAutoUpdate', 'captchaLanguage', 'boardnav', 'time', 'timeLocale', 'backlink', 'pastedname', 'fileInfo', 'QR.personas', 'favicon', 'usercss', 'customCooldown', 'jsWhitelist']
+    for name in ['archiveLists', 'archiveAutoUpdate', 'captchaLanguage', 'boardnav', 'time', 'timeLocale', 'backlink', 'pastedname', 'fileInfo', 'QR.personas', 'favicon', 'usercss', 'customCooldown', 'jsWhitelist', 'pageWarningEnabled', 'startWarningAtPage']
       items[name] = Conf[name]
       input = inputs[name]
       event = if name in ['archiveLists', 'archiveAutoUpdate', 'QR.personas', 'favicon', 'usercss'] then 'change' else 'input'

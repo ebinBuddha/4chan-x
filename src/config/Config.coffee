@@ -1131,6 +1131,8 @@ Config =
 
   customCooldown: 0
   customCooldownEnabled: true
+  startWarningAtPage: 8
+  pageWarningEnabled: false
 
   'Thread Quotes': false
 

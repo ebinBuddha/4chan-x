@@ -1,6 +1,8 @@
 ThreadStats =
   init: ->
     return if g.VIEW isnt 'thread' or !Conf['Thread Stats']
+    
+    @lastWarningPageCheck = 1
 
     statsHTML = <%= html(
       '<span id="post-count">?</span> / <span id="file-count">?</span>' +
@@ -93,6 +95,7 @@ ThreadStats =
             (if page.page is @response.length then $.addClass else $.rmClass) ThreadStats.pageCountEl, 'warning'
             ThreadStats.lastPageUpdate = new Date thread.last_modified * $.SECOND
             ThreadStats.retry()
+            ThreadStats.notify(page.page)
             return
     else if @status is 304
       ThreadStats.retry()
@@ -102,3 +105,20 @@ ThreadStats =
     if g.BOARD.ID isnt 'f' and ThreadStats.lastPost > ThreadStats.lastPageUpdate and ThreadStats.pageCountEl?.textContent isnt '1'
       clearTimeout ThreadStats.timeout
       ThreadStats.timeout = setTimeout ThreadStats.fetchPage, 5 * $.SECOND
+
+  notify: (page) ->
+    return unless Conf['pageWarningEnabled']
+    maxPage = Conf['startWarningAtPage']
+    if page >= maxPage and @lastWarningPageCheck < page
+      if Header.areNotificationsEnabled
+        notif = new Notification "Page number warning",
+          body: "Page #{page} reached!"
+          icon: Favicon.logo
+        notif.onclick = ->
+          Header.scrollToIfNeeded @nodes.bottom, true
+          window.focus()
+        notif.onshow = ->
+          setTimeout ->
+            notif.close()
+          , 7 * $.SECOND
+    @lastWarningPageCheck = page
