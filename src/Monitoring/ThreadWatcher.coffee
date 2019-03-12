@@ -224,6 +224,8 @@ ThreadWatcher =
         onloadend: ->
           ThreadWatcher.parseStatus.call @, thread
         timeout: $.MINUTE
+      ,
+        whenModified: if force then false else 'ThreadWatcher'
     else
       req = {abort: () -> req.aborted = true}
       CrossOrigin.json url, ->
@@ -274,7 +276,7 @@ ThreadWatcher =
         while match = regexp.exec postObj.com
           if QuoteYou.db.get {
             siteID
-            boardID:  match[1] or boardID
+            boardID:  if match[1] then encodeURIComponent(match[1]) else boardID
             threadID: match[2] or threadID
             postID:   match[3] or match[2] or threadID
           }
